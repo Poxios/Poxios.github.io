@@ -1,112 +1,80 @@
-## Jasper2
+# 딥러닝 공부
 
-[![Build Status](https://travis-ci.org/jekyller/jasper2.svg?branch=master)](https://travis-ci.org/jekyller/jasper2)
-[![Ruby](https://img.shields.io/badge/ruby-2.5.1-blue.svg?style=flat)](http://travis-ci.org/jekyller/jasper2)
-[![Jekyll](https://img.shields.io/badge/jekyll-3.7.4-blue.svg?style=flat)](http://travis-ci.org/jekyller/jasper2)
+https://developers.google.com/machine-learning/crash-course
 
-This is a full-featured port of Ghost's default theme [Casper](https://github.com/tryghost/casper)
-*v2.1.9* for [Jekyll](https://jekyllrb.com/) / [GitHub Pages](https://pages.github.com/).
+## 영현, 윤성
 
-## Live Demo
+## 유용한 링크들
 
-[Ghost's Casper](https://demo.ghost.io) // [Jasper2](https://jekyller.github.io/jasper2)
+마크다운 공부:  
+https://theorydb.github.io/envops/2019/05/22/envops-blog-how-to-use-md/
 
-![home page](https://raw.githubusercontent.com/jekyller/jasper2/master/assets/screenshot-desktop.jpg)
+## 일정
 
+**2021-01-04**  
+github 블로그 생성하기.  
+구글 머신러닝 코스 초기 진입하기.
 
-## Features
+**2021-01-05**  
+선형 회귀 (Linear Regression)  
+https://wikidocs.net/21670  
+일단 위 링크의 1번 부분만읽고 구글 ㄱㄱ
 
-* Out of the box support for multiple authors (via `_data/authors.yml`)
-* Full author information including: picture, bio, website, twitter, facebook, etc.
-* Tag description(s) and personalised covers (via `_data/tags.yml`)
-* Related posts view at the bottom of each post
-* All Ghost default pages: Author page(s), Tag page(s), About page(s), 404, etc.
-* Pagination (infinite scrolling or standard pagination, i.e. posts across multiple pages)
-* Atom Feeds by [Jekyll-feed](https://github.com/jekyll/jekyll-feed)
-* Toggleable subscribe button (requires an external service)
-* Code Syntax Highlight with [highlight.js](https://highlightjs.org/)
-* Support for Google Analytics tracking
-* Support for Disqus comments (not Ghost standard)
+**2021-01-06**  
+구글 크래시 코스 - 1강 듣고 정리
 
+# 1강 - ML 소개
 
-## Getting Started
+여기에서 배우면 3가지 더 잘 하게 됨.
 
-### Deployment
+1. 프로그래밍 시간을 줄일 수 있는 도구를 얻게됨.
+2. '맞춤 설정'으로 각 상황에 맞는 프로그래밍을 더 유동적으로 만들 수 있음.
+3. '언어'관련 프로그램을 만들때에도 언어를 바꾸기만 하면 작동함.
 
-**Important:**  For security reasons, Github does not allow plugins (under `_plugins/`) when
-deploying with Github Pages. This means that we have to do one of the following:
+프로그램으로써 수동으로 할 수 없는 일을 짤 수 있음.
 
-**1)** generate the site locally (more details below) and push the resulting
-HTML (the contents of `_site/` or `../jasper2-pages/`) to a Github repository, that GitHub Pages
-then host;
+## 머신러닝을 배워야 하는 철학적 이유
 
-**2)** build the site with [travis-ci](https://travis-ci.org/) (with goodies from
-[jekyll-travis](https://github.com/mfenner/jekyll-travis)) automatically pushing the
-generated HTML files to a *gh-pages* branch.
-This later approach is the one I am currently using to generate the live demo.
+내 프로그램의 속성이 옳다는 것을 증명하기 위해 '논리'를 배움.  
+보는 시야 자체를 넓히는 것에 집중할 것.
 
-**3)** deploy the static website with Jekyll-compatible hosters, such as https://www.netlify.com/, that allow for deployment from the Github repo and publish the website using CDNs. Netlify has a free starter offer.
+# 2강 - ML 문제로 표현하기
 
-For option **1)** simply clone this repository (*master branch*), and then run
-`bundle exec jekyll serve` inside the directory. Upload the resulting `_site/` (or `../jasper2-pages/`)
-contents to your repository (*master branch* if uploading as your personal page
-(e.g. username.github.io) or *gh-pages branch* if uploading as a project page
-(as for the [demo](https://github.com/jekyller/jasper2/tree/gh-pages)).
+지도 머신러닝
 
-For option **2)** you will need to set up travis-ci for your personal fork. Briefly all you
-need then is to change your details in *[\_config.yml](_config.yml)* so that you can push
-to your github repo. You will also need to generate a secure key to add to your
-*[.travis.yml](.travis.yml)* (you can find more info on how to do it in that file).
-Also make sure you read the documentation from
-[jekyll-travis](https://github.com/mfenner/jekyll-travis). This approach has clear
-advantages in that you simply push your file changes to GitHub and all the HTML files
-are generated for you and pushed to *gh-pages*. Also you get to know if everything is
-still fine with your site builds. Don't hesitate to contact me if you still have any
-issues (see below about issue tracking).
+- 모델 학습할때 '라벨' 제공 - 예를 들어, 이메일 스팸 필터링에서 '스팸 또는 스팸 아님' 정도. 이것이 우리가 예측하려는 타겟.
+- 특성을 데이터를 표현하는 정보.
+- 특성은 해당 이메일에서 추출할 수 있는 어떤 정보든 가져와서 머신러닝 시스템에 나타낼 수 있음.
+- 라벨이 없는 예 - 특성 정보가 없는 것들.
+- 바로 예측을 하는 모델을 만들 것.
 
-### Author Pages
+**라벨** - '예측하는 항목' (단순 선형 회귀의 y 변수)  
+ ex) 밑의 향후 가격, 사진에 표시되는 동물의 종류, 오디오 클립의 의미 등 무엇이든 라벨이 될 수 있음.  
+<br />
+**특성** - '입력 변수' (단순 선형 회귀의 x 변수)
+ex) 간단한 머신러닝 프로젝트에서는 특성을 한 개만 사용하지만 복잡한 프로젝트의 경우 수백만 개의 특성을 사용할 수 있음. x1, x2, x3... xN 이렇게.  
+ 특성의 예로는 이메일 텍스트의 단어, 보내는 사람의 주소, 이메일이 전송된 시간, '특정 구문'이 포함된 이메일.  
+ <br/>
+그러니까 특성은 꺼내올 수 있는 대상이고 라벨은 예측하는 대상이다.
 
-In order to properly generate author pages you need to rename the field *author* in the
-front matter of every post to match that of your each author's *username* as defined
-in the *[\_data/authors.yml](_data/authors.yml)* file.
-With the latest update, multiple author blogs are now supported out of the box.
+## 모델을 학습 시키려면
 
-### Compiling Styles
+모델을 학습 시키려면 '라벨이 있는 예'를 사용할 것.  
+스팸 감지 예시에서는 사용자가 '스팸 또는 스팸 아님'으로 명시해준 이메일들이 그 예가 됨. 라벨이 있는 것에서 없는 것을 예측하는게 머신 러닝이다.
 
-Following on the way Casper styles are compiled as [described here](https://github.com/tryghost/casper#development):
+---
 
-Jasper2 styles are compiled using Gulp/PostCSS to polyfill future CSS spec. You'll need Node and Gulp installed globally. After that, from the theme's root directory:
+**모델** - 모델이란 특성과 라벨의 관계를 정의하는 것. 예를 들어 스팸 감지 모델에서, 특정 특성과 스팸을 긴밀하게 연결하는 것.  
+<br/>
+**학습** - 모델을 만들거나 배우는 것. 라벨이 있는 예를 모델에 보여주고, 모델이 특성과 라벨의 관계를 점차적으로 학습하게 하는 것.  
+<br/>
+**추론** - 학습된 모델을 라벨이 없는 예에 적용하는 것. 학습된 모델로, 유용한 예측 (y')를 해낸다.  
+<br/>
+**회귀** - 연속적인 값을 예측. 예를 들어, 캘리포니아의 주택 가격이 얼마인가? 사용자가 이 광고를 클릭할 확률이 얼마인가?  
+<br/>
+**분류** - 불연속적인 값을 예측. 예를 들어, 주어진 이메일 메세지가 스팸인가 아닌가. 이 이미지가 강아지인가 고양이인가.
+<br/>
 
-```bash
-$ npm install
-$ gulp
-```
+---
 
-Now you can edit `/assets/css/` files, which will be compiled to `/assets/built/` automatically.
-
-## Issues and Contributing
-
-This install builds well with Ruby v2.5.1 and Jekyll v3.7.4. If you run into any problems
-please log them on the [issue tracker](https://github.com/jekyller/jasper2/issues).
-
-Feel free pull-request your patches and fixes.
-
-## Thanks
-
-
-Many thanks to the Ghost team for all the design work. Also many thanks to all contributors,
-that help keeping the project alive and updated :smile:
-
-
-## Copyright & License
-
-Same licence as the one provided by Ghost's team. See Casper's theme [license](GHOST.txt).
-
-Copyright (C) 2015-2018 - Released under the MIT License.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+사용자가 '좋아'하는게 아닌, '설명 클릭 횟수'같은게 쓸모있는 것임.
